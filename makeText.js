@@ -37,15 +37,22 @@ if(argv.length >=2){
     } else if(argv[2] ==="url") {
         console.log("url")
         console.log(`...generated text from ${argv[3]}:`)
-        try{
-            let file = fs.readFileSync(argv[3], 'utf8')
-            let mmm= new MarkovMachine(file)
-            mmm.makeText()
-        } catch (e) {
-            console.log("Error with file input:", e)
-        }
+        makeURLText(argv[3])
     }
 
+}
+
+async function makeURLText(url) {
+    let resp;
+  
+    try {
+      resp = await axios.get(url);
+    } catch (err) {
+      console.error(`Cannot read URL: ${url}: ${err}`);
+      process.exit(1);
+    }
+    let mmm= new MarkovMachine(resp.data)
+    mmm.makeText()
 }
 
 // let eggs=readMe('eggs.txt')
