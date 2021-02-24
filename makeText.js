@@ -4,42 +4,50 @@
 const fs= require('fs');
 const axios=require('axios');
 const process = require('process');
-{ MarkovMachine } = require("./markov")
-
-
-function readMe(file){
-  fs.readFile(file, 'utf8', function(err, data) {
-    if (err) {
-      // handle possible error
-      console.error("Error finding:", err);
-      // kill the process and tell the shell it errored
-      process.exit(1);
-    }
-    // otherwise success
-    console.log(`file contents: ${data}`);
-    return data
-  });
-}
-
-async function webCat(url) {
-    try {
-      let resp = await axios.get(url);
-      console.log(resp.data);
-    } catch (err) {
-      console.error(`Error fetching ${url}: ${err}`);
-      process.exit(1);
-    }
-  }
-
-// // // let mm = new MarkovMachine( "the cat in the hat is in the hat")
-
+const { MarkovMachine }=require('./markov');
 const argv = process.argv;
-console.log(argv)
 
-if(argv[2] === "file"){
-    console.log("file")
+// const text = fs.readFileSync('eggs.txt','utf8')
+
+// // const fail=fs.readFileSync("fail.txt", 'utf8')
+// // console.log(fail)
+
+// let mmm= new MarkovMachine(text)
+// mmm.makeText(numWords=10)
+
+
+// const argv = process.argv;
+// console.log(argv)
+
+if(argv.length >=2){
+    if(argv[2] === "file"){
+        console.log("file")
+        console.log(`...generated text from ${argv[3]}:`)
+        try{
+            let file = fs.readFileSync(argv[3], 'utf8')
+            let mmm= new MarkovMachine(file)
+            mmm.makeText()
+
+        } catch (e) {
+            console.log("Error with file input:", e)
+        }
+        
+
+    
+    } else if(argv[2] ==="url") {
+        console.log("url")
+        console.log(`...generated text from ${argv[3]}:`)
+        try{
+            let file = fs.readFileSync(argv[3], 'utf8')
+            let mmm= new MarkovMachine(file)
+            mmm.makeText()
+        } catch (e) {
+            console.log("Error with file input:", e)
+        }
+    }
 
 }
+
 // let eggs=readMe('eggs.txt')
 // console.log(eggs)
 // let mmm= new MarkovMachine(eggs)
