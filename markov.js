@@ -40,11 +40,9 @@ class MarkovMachine {
      
     }
 
-    console.log(wordObj)
+    // console.log(wordObj)
 
     return wordObj
-
-      
 
   }
     
@@ -58,8 +56,52 @@ class MarkovMachine {
 
   makeText(numWords = 100) {
     // TODO
+
+    //pick a random starting word from this.words
+    let startWord = this.words[Math.floor(Math.random() * this.words.length)];
+    let chains=this.makeChains();
+
+    console.log(chains)
+
+    let sentence = startWord;
+    let newStartWord;
+    let nextWord;
+
+    for(let i=1; i < numWords; i++){
+      if(i===1){
+        nextWord= chains[startWord][Math.floor(Math.random() * chains[startWord].length)];
+        if(!nextWord){
+          console.log(nextWord)
+          break
+        }
+        sentence=sentence.concat(" ", nextWord);
+        
+        console.log(sentence)
+        newStartWord=nextWord;
+      } else {
+
+        nextWord=chains[newStartWord][Math.floor(Math.random() * chains[newStartWord].length)];
+        if(!nextWord){
+          console.log(nextWord)
+          break
+        }
+        sentence=sentence.concat(" ", nextWord);
+        console.log(sentence);
+        newStartWord=nextWord;
+
+      }
+      
+      
+    }
+
+    
+    console.log(sentence)
+   
+
+
   }
 }
 
 let mm = new MarkovMachine( "the cat in the hat is in the hat")
+mm.makeText(numWords=6)
 
