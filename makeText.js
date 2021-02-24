@@ -4,13 +4,14 @@
 const fs= require('fs');
 const axios=require('axios');
 const process = require('process');
+{ MarkovMachine } = require("./markov")
 
 
 function readMe(file){
   fs.readFile(file, 'utf8', function(err, data) {
     if (err) {
       // handle possible error
-      console.error(err);
+      console.error("Error finding:", err);
       // kill the process and tell the shell it errored
       process.exit(1);
     }
@@ -34,6 +35,11 @@ async function webCat(url) {
 
 const argv = process.argv;
 console.log(argv)
+
+if(argv[2] === "file"){
+    console.log("file")
+
+}
 // let eggs=readMe('eggs.txt')
 // console.log(eggs)
 // let mmm= new MarkovMachine(eggs)
