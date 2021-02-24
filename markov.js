@@ -102,6 +102,31 @@ class MarkovMachine {
   }
 }
 
-let mm = new MarkovMachine( "the cat in the hat is in the hat")
-mm.makeText(numWords=6)
+
+
+const fs = require('fs');
+
+function readMe(file){
+  fs.readFile(file, 'utf8', function(err, data) {
+    if (err) {
+      // handle possible error
+      console.error(err);
+      // kill the process and tell the shell it errored
+      process.exit(1);
+    }
+    // otherwise success
+    console.log(`file contents: ${data}`);
+    return data
+  });
+}
+
+
+
+
+// let mm = new MarkovMachine( "the cat in the hat is in the hat")
+
+let eggs=readMe('eggs.txt')
+console.log(eggs)
+let mmm= new MarkovMachine(eggs)
+mmm.makeText(numWords=25)
 
