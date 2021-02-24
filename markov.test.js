@@ -40,6 +40,9 @@ describe("MarkovMachine makeText method", function () {
     test('create a new string from the test that was passed in', function () {
         let mmText = mm.makeText()
         expect(mmText).toEqual(expect.any(String))
+        let mmWords = mm.words;
+        let firstWord=mmText.split(' ')[0]
+        expect(mmWords).toContain(firstWord)
         
       });
 

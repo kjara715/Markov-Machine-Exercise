@@ -71,22 +71,19 @@ class MarkovMachine {
       if(i===1){
         nextWord= chains[startWord][Math.floor(Math.random() * chains[startWord].length)];
         if(!nextWord){
-          console.log(nextWord)
+          //if null
           break
         }
         sentence=sentence.concat(" ", nextWord);
-        
-        console.log(sentence)
         newStartWord=nextWord;
       } else {
 
         nextWord=chains[newStartWord][Math.floor(Math.random() * chains[newStartWord].length)];
         if(!nextWord){
-          console.log(nextWord)
+          //if null
           break
         }
         sentence=sentence.concat(" ", nextWord);
-        console.log(sentence);
         newStartWord=nextWord;
 
       }
@@ -126,7 +123,7 @@ module.exports={MarkovMachine}
 
 
 
-// // // let mm = new MarkovMachine( "the cat in the hat is in the hat")
+// // // // let mm = new MarkovMachine( "the cat in the hat is in the hat")
 
 // let eggs=readMe('eggs.txt')
 // console.log(eggs)
